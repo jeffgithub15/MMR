@@ -19,7 +19,6 @@ var KanbanApplication = React.createClass({
 
         return (
             <div>
-                <input type="button" className="btn" value="Save" />
                 <p>{message}</p>
             </div>)
     }
