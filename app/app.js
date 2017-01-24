@@ -4,31 +4,36 @@ import Button from 'react-bootstrap/lib/Button';
 import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
 import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar';
 */
+
 var React = require('react');
 var ReactDOM = require('react-dom');
-var $ = require('jquery');
-import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
-import BootstrapJs from 'bootstrap/dist/js/bootstrap.js';
+
+import HeaderLayout from './components/header';
+import JumbotronLayout from './components/jumbotron';
+import SectionLayout from './components/section';
+import FooterLayout from './components/footer';
 
 
-var KanbanApplication = React.createClass({
+var MMRApplication = React.createClass({
     render: function () {
-        var elapsed = Math.round(this.props.elapsed / 100);
-        var seconds = elapsed / 10 + (elapsed % 10 ? '' : '.0');
-        var message = 'Hello World! React has been successfully running for ' + seconds + ' seconds.';
-
         return (
             <div>
-                <p>{message}</p>
-            </div>)
+                <HeaderLayout />
+                <JumbotronLayout title="Magenic Masters React Js" label="Bootstrap Bootstrap Bootstrap Bootstrap"/>
+                <div className="container-fluid">
+                    <div className="row">
+                        <SectionLayout title="HTML" label="Lorem Ipsum is simply dummy text of the printing and typesetting industry."/>
+                        <SectionLayout title="CSS" label="Lorem Ipsum is simply dummy text of the printing and typesetting industry."/>
+                        <SectionLayout title="JS" showButton="true" label="Lorem Ipsum is simply dummy text of the printing and typesetting industry."/>
+                    </div>
+                    <FooterLayout title="FOOTER MMR - Lorem Ipsum is simply dummy text of the printing and typesetting industry."/>
+                </div>
+            </div>
+        );
     }
 });
 
-var start = new Date().getTime();
-setInterval(function () {
-    ReactDOM.render(
-        <KanbanApplication elapsed={new Date().getTime() - start} />,
-        document.getElementById('root')
-    );
-}, 50);
-
+ReactDOM.render(
+    <MMRApplication />,
+    document.getElementById('root')
+);
