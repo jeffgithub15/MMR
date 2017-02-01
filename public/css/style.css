@@ -2,3 +2,9 @@
 .section-border
 {
 }
+
+.td-sub-label
+{
+    font-size: 9pt;
+    margin-left: 10px;
+}

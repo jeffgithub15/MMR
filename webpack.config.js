@@ -2,11 +2,12 @@ const webpack = require('webpack');
 
 const config = {
     devtool: "inline-source-map",
-    entry: __dirname + "/app/app.js",
+    entry: __dirname + "/app/main.js",
     output: {
         path: "./public/js/",
         publicPath: "/js/",
-        filename: "bundle.js"
+        filename: "bundle.js",
+        port: 8100
     },
     module: {
         loaders: [

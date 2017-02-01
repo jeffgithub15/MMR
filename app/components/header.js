@@ -7,9 +7,13 @@ import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
 import BootstrapJs from 'bootstrap/dist/js/bootstrap.js';
 
 var HeaderLayout = React.createClass({
+    getActiveClass: function (page) {
+        return page === this.props.page ? "active" : '';
+    },
     render: function () {
         return (
             <nav className="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
+
                 <div className="container-fluid">
                     <div className="navbar-header">
                         <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#navbarCollapse">
@@ -22,9 +26,9 @@ var HeaderLayout = React.createClass({
                     </div>
                     <div className="collapse navbar-collapse" id="navbarCollapse">
                         <ul className="nav navbar-nav">
-                            <li className="active"><a href="#">Dashboard</a></li>
-                            <li><a href="#">About</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li className={this.getActiveClass('/tasks')}><a href="tasks">Tasks</a></li>
+                            <li className={this.getActiveClass('/about')}><a href="about">About</a></li>
+                            <li className={this.getActiveClass('/contact')}><a href="contact">Contact</a></li>
                         </ul>
                     </div>
                 </div>
