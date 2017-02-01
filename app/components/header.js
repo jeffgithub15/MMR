@@ -2,7 +2,7 @@
 'user strict'
 
 var React = require('react');
-var $ = require('jquery');
+
 import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
 import BootstrapJs from 'bootstrap/dist/js/bootstrap.js';
 

@@ -22,17 +22,7 @@ var ContactApp = React.createClass({
     render: function () {
         return (
             <div>
-                About Page
-            </div>
-        );
-    }
-});
-
-var DefaultApp = React.createClass({
-    render: function () {
-        return (
-            <div>
-                Default Page
+                Contact Page
             </div>
         );
     }

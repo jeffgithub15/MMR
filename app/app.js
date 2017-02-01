@@ -2,6 +2,7 @@
 
 var React = require('react');
 var ReactDOM = require('react-dom');
+var $ = require('jquery');
 
 import HeaderLayout from './components/header';
 import JumbotronLayout from './components/jumbotron';

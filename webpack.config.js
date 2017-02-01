@@ -6,8 +6,7 @@ const config = {
     output: {
         path: "./public/js/",
         publicPath: "/js/",
-        filename: "bundle.js",
-        port: 8100
+        filename: "bundle.js"
     },
     module: {
         loaders: [
