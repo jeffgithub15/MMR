@@ -17,7 +17,7 @@ var MMRApplication = React.createClass({
             <div>                
                 <HeaderLayout page={this.props.location.pathname}/>
                 <JumbotronLayout title="Magenic Masters React Js" label="Bootstrap Bootstrap Bootstrap Bootstrap" />
-                <div className="container-fluid">
+                <div className="container">
                     <div className="row">                        
                         {this.props.children}
                     </div>
@@ -34,6 +34,5 @@ var tasks = [
     { id: 3, name: 'Finish Week 3 Deck', description: 'Props and State', priority: '3', status: 'Done' }];
 
 localStorage.setItem("tasks", JSON.stringify(tasks));
-
 
 module.exports = MMRApplication;
