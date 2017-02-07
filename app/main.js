@@ -2,9 +2,9 @@
 
 var React = require('react');
 var ReactDOM = require('react-dom');
+var StorageHelper = require('./helpers/storagehelper');
 
 import { Router, Route, Link, IndexRoute, hashHistory, browserHistory } from 'react-router'
-
 import TaskTable from './components/tasks';
 import MMRApplication from './app.js';
 
@@ -39,3 +39,5 @@ ReactDOM.render((
   </Router>
 ), document.getElementById('root'))
 
+
+StorageHelper.InitTaskData();

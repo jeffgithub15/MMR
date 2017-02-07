@@ -28,11 +28,12 @@ var MMRApplication = React.createClass({
     }
 });
 
+/*
 var tasks = [ 
     { id: 1, name: 'Finish Week 1 Deck', description: 'Introduction, React Component, JSX, Virtual DOM', priority: '1', status: 'Done' },
     { id: 2, name: 'Finish Week 1 Quiz', description: 'Introduction to MMR', priority: '2', status: 'Done' },
     { id: 3, name: 'Finish Week 3 Deck', description: 'Props and State', priority: '3', status: 'Done' }];
 
-localStorage.setItem("tasks", JSON.stringify(tasks));
+localStorage.setItem("tasks", JSON.stringify(tasks));*/
 
 module.exports = MMRApplication;

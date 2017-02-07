@@ -2,8 +2,9 @@
 'user strict'
 
 var React = require('react');
-import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
+var StorageHelper = require('./../helpers/storagehelper');
 
+import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
 
 var TaskActionButton = React.createClass({
     getInitialState: function () {
@@ -13,17 +14,15 @@ var TaskActionButton = React.createClass({
         }
     },
     onEditFormHandler: function (task) {
-        //onClick={()=>{this.props.onEditHandler(this.state.task)}} 
         this.setState({ onEditForm: true });
-        this.props.onEditHandler(task)
-
+        this.props.onEditHandler(task)        
+    },
+    onDeleteFormHandler: function(task){
+        this.props.onDeleteHandler(task);
     },
     onSaveOrCancelFormHandler: function (task) {
         this.setState({ onEditForm: false });
-        this.props.onSaveOrCancelFormHandler(task)
-    },
-    componentDidUpdate: function () {
-
+        this.props.onSaveHandler(task)
     },
     render: function () {
         var style1 = 'btn-group', style2 = 'hidden';
@@ -36,7 +35,8 @@ var TaskActionButton = React.createClass({
                 <div className={style1} role="group" aria-label="...">
                     <a href="#" onClick={() => { this.onEditFormHandler(this.state.task) } } className="btn btn-primary">
                         <span className="glyphicon glyphicon-pencil"></span></a>
-                    <a href="#" className="btn btn-danger"><span className="glyphicon glyphicon-trash"></span></a>
+                    <a href="#" onClick={() => { this.onDeleteFormHandler(this.state.task) } }
+                        className="btn btn-danger"><span className="glyphicon glyphicon-trash"></span></a>
                 </div>
                 <div className={style2} role="group" aria-label="...">
                     <a href="#" onClick={() => { this.onSaveOrCancelFormHandler(this.state.task) } } className="btn btn-success">

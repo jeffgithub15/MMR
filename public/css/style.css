@@ -8,3 +8,10 @@
     font-size: 9pt;
     margin-left: 10px;
 }
+
+.task-min-height-panel
+{
+    height: 380px;
+    overflow-y: scroll;
+    margin: 5px;
+}
