@@ -9,11 +9,11 @@ var TablePagination = React.createClass({
     getInitialState: function () {
         return {
             totalRowDisplay: this.props.totalRowDisplay,
-            filteredData: [], 
+            filteredData: [],
             currentPage: 1
         }
     },
-    onPagingHandler: function (page) {        
+    onPagingHandler: function (page) {
         var filters = [];
         /*
         var datas = this.props.data;
@@ -24,13 +24,15 @@ var TablePagination = React.createClass({
                 nextIndex += 1;
             }
         }*/
+        this.setState({ currentPage: page });
         this.props.onPagingHandler(page);
     },
     generatePaging: function () {
         var totalPage = Math.ceil(this.props.data.length / this.props.totalRowDisplay);
         var buttons = [];
         for (var i = 1; i < totalPage + 1; i++) {
-            buttons.push(<Button key={i} onClick={this.onPagingHandler.bind(null, i)}>{i}</Button>)
+            var bsStyle = i == this.state.currentPage ? 'primary' : 'default';
+            buttons.push(<Button bsStyle={bsStyle} key={i} onClick={this.onPagingHandler.bind(null, i)}>{i}</Button>)
         }
         return buttons;
     },
