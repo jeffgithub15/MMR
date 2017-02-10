@@ -16,7 +16,7 @@ var MMRApplication = React.createClass({
         return (
             <div>                
                 <HeaderLayout page={this.props.location.pathname}/>
-                <JumbotronLayout title="Magenic Masters React Js" label="Bootstrap Bootstrap Bootstrap Bootstrap" />
+                <JumbotronLayout title="Magenic Masters React Js" label="" />
                 <div className="container">
                     <div className="row">                        
                         {this.props.children}
