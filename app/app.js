@@ -1,8 +1,7 @@
-'user strict'
-
-var React = require('react');
-var ReactDOM = require('react-dom');
-var $ = require('jquery');
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import $ from 'jquery';
+/*var $ = require('jquery');*/
 
 import HeaderLayout from './components/header';
 import JumbotronLayout from './components/jumbotron';
@@ -11,8 +10,8 @@ import FooterLayout from './components/footer';
 import TaskTable from './components/tasks';
 
 
-var MMRApplication = React.createClass({
-    render: function () {
+export default class MMRApplication extends React.Component{
+    render () {
         return (
             <div>                
                 <HeaderLayout page={this.props.location.pathname}/>
@@ -26,14 +25,4 @@ var MMRApplication = React.createClass({
             </div>
         );
     }
-});
-
-/*
-var tasks = [ 
-    { id: 1, name: 'Finish Week 1 Deck', description: 'Introduction, React Component, JSX, Virtual DOM', priority: '1', status: 'Done' },
-    { id: 2, name: 'Finish Week 1 Quiz', description: 'Introduction to MMR', priority: '2', status: 'Done' },
-    { id: 3, name: 'Finish Week 3 Deck', description: 'Props and State', priority: '3', status: 'Done' }];
-
-localStorage.setItem("tasks", JSON.stringify(tasks));*/
-
-module.exports = MMRApplication;
+};

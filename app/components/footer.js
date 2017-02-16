@@ -1,14 +1,11 @@
-
-'user strict'
-
-var React = require('react');
+import React, { Component } from 'react';
 import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
 
-var FooterLayout = React.createClass({
-    render: function () {
+export default class FooterLayout extends React.Component {
+    render() {
         return (
             <div className="row">
-                <hr/>
+                <hr />
                 <div className="col-xs-12">
                     <footer>
                         <p>{this.props.title}</p>
@@ -16,6 +13,4 @@ var FooterLayout = React.createClass({
                 </div>
             </div>)
     }
-});
-
-module.exports = FooterLayout;
+};

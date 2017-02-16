@@ -1,12 +1,9 @@
-
-'user strict'
-
-var React = require('react');
+import React, { Component } from 'react';
 import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
 
 
-var JumbotronLayout = React.createClass({
-    render: function () {
+export default class JumbotronLayout extends React.Component {
+    render() {
         return (
             <div className="jumbotron">
                 <div className="container-fluid">
@@ -16,6 +13,4 @@ var JumbotronLayout = React.createClass({
                 </div>
             </div>)
     }
-});
-
-module.exports = JumbotronLayout;
+};

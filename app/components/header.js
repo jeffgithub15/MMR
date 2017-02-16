@@ -1,16 +1,13 @@
 
-'user strict'
-
-var React = require('react');
-
+import React, { Component } from 'react';
 import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
 import BootstrapJs from 'bootstrap/dist/js/bootstrap.js';
 
-var HeaderLayout = React.createClass({
-    getActiveClass: function (page) {
+export default class HeaderLayout extends React.Component{
+    getActiveClass(page) {
         return page === this.props.page ? "active" : '';
-    },
-    render: function () {
+    }
+    render() {
         return (
             <nav className="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
 
@@ -34,6 +31,4 @@ var HeaderLayout = React.createClass({
                 </div>
             </nav>)
     }
-});
-
-module.exports = HeaderLayout;
+};

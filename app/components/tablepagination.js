@@ -1,56 +1,47 @@
 
-'user strict'
-
-var React = require('react');
+import React, { Component } from 'react';
 import { ButtonToolbar, ButtonGroup, Button } from 'react-bootstrap';
 import Lodash from 'lodash';
 
-var TablePagination = React.createClass({
-    getInitialState: function () {
-        return {
+export default class TablePagination extends React.Component {
+    constructor() {
+        super();
+        this.state = {
             totalRowDisplay: 5,
             filteredData: [],
             currentPage: 1
-        }
-    },
-    onPagingHandler: function (page) {
-        var filters = [];
-        /*
-        var datas = this.props.data;
-        var nextIndex = (page - 1) * this.state.totalRowDisplay;
-        for (var i = 0; i < this.state.totalRowDisplay; i++) {
-            if (datas[nextIndex] != undefined) {
-                filters.push(datas[nextIndex]);
-                nextIndex += 1;
-            }
-        }*/
+        };
+    }
+    componentWillMount() {
+    }
+    onPagingHandler(page) {
         this.setState({ currentPage: page });
         this.props.onPagingHandler(page, this.state.totalRowDisplay);
-    },
-    generatePaging: function () {
-        var totalPage = Math.ceil(this.props.data.length / this.state.totalRowDisplay);
-        var buttons = [];
+    }
+    generatePaging() {
+        const totalPage = Math.ceil(this.props.data.length / this.state.totalRowDisplay);
+        let buttons = [];
         if (totalPage > 1) {
             for (var i = 1; i < totalPage + 1; i++) {
                 var bsStyle = i == this.props.currentPage ? 'primary' : 'default';
-                buttons.push(<Button bsStyle={bsStyle} key={i} onClick={this.onPagingHandler.bind(null, i)}>{i}</Button>)
+                buttons.push(<Button bsStyle={bsStyle} key={i} onClick={this.onPagingHandler.bind(this, i)}>{i}</Button>)
             }
         }
         return buttons;
-    },
-    selectedValueHandler: function (e) {
-        this.setState({ totalRowDisplay: e.target.value});
+    }
+    selectedValueHandler(e) {
+        this.setState({ totalRowDisplay: e.target.value });
         this.generatePaging();
         this.props.selectedValueHandler(e);
-    },
-    render: function () {
+    }
+    render() {
         return (
             <div>
                 <div className="row">
                     <div className="col-xs-6 col-sm-7"></div>
                     <div className="col-xs-6 col-sm-2 pull-right">
                         <select className="form-control"
-                            onChange={this.selectedValueHandler}>
+                            onChange={this.selectedValueHandler.bind(this)}>
                             <option>5</option>
                             <option>10</option>
                             <option>20</option>
@@ -63,9 +54,6 @@ var TablePagination = React.createClass({
                     </ButtonToolbar></div>
                 </div>
 
-            </div>
-        )
+            </div>)
     }
-});
-
-module.exports = TablePagination;
+}

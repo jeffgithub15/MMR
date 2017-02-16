@@ -1,29 +1,27 @@
 
-'user strict'
-
-var React = require('react');
-var StorageHelper = require('./../helpers/storagehelper');
-
+import React, { Component } from 'react';
+import * as StorageHelper from '../helpers/storagehelper';
 import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
 import TaskTableRow from './tasktablerow.js';
 import TaskAddModal from './taskaddmodal.js';
 import TablePagination from './tablepagination';
 import Lodash from 'lodash';
 
-var TaskTable = React.createClass({
-    getInitialState: function () {
-        return {
+export default class TaskTable extends React.Component {
+    constructor() {
+        super();
+        this.state = {
             tasks: StorageHelper.GetTasks(),
             filteredTasks: [],
             currentPage: 1,
             currentSortName: { column: 'name', direction: '' },
             totalRowDisplay: 5
-        }
-    },
-    componentWillMount: function () {
+        };
+    }
+    componentWillMount() {
         this.onPagingHandler(1, this.state.totalRowDisplay);
-    },
-    getTableHeader: function () {
+    }
+    getTableHeader() {
         return (
             <tr className="info">
                 <th>
@@ -38,35 +36,32 @@ var TaskTable = React.createClass({
                 <th></th>
             </tr>
         )
-    },
-    getTaskRows: function () {
-        var rows = [];
+    }
+    getTaskRows() {
+        let rows = [];
         for (var i = 0; i < this.state.filteredTasks.length; i++) {
             rows.push(<TaskTableRow key={this.state.filteredTasks[i].id} className="pull-right"
                 task={this.state.filteredTasks[i]}
-                onSaveHandler={this.onSaveHandler}
-                onDeleteHandler={this.onDeleteHandler} />);
+                onSaveHandler={this.onSaveHandler.bind(this)}
+                onDeleteHandler={this.onDeleteHandler.bind(this)} />);
         }
         return rows;
-    },
-    onEditHandler: function (task) {
-
-    },
-    onSaveHandler: function (task) {
+    }
+    onSaveHandler(task) {
         StorageHelper.Save(task);
         this.setState({ tasks: StorageHelper.GetTasks() });
         this.onPagingHandler(this.state.currentPage, this.state.totalRowDisplay);
-    },
-    onDeleteHandler: function (task) {
+    }
+    onDeleteHandler(task) {
         StorageHelper.Delete(task);
         this.setState({ tasks: StorageHelper.GetTasks() });
         this.onPagingHandler(this.state.currentPage, this.state.totalRowDisplay);
-    },
-    onSelectedCurrentPage: function (page) {
+    }
+    onSelectedCurrentPage(page) {
         this.onPagingHandler(page, this.state.totalRowDisplay, this.state.currentSortName);
         this.setState({ currentPage: page });
-    },
-    onSorting: function (sortName) {
+    }
+    onSorting(sortName) {
         var datas = StorageHelper.GetTasks();
         var currentColumn = this.state.currentSortName;
         var columnToFind = (sortName == undefined ? this.state.currentSortName : sortName);
@@ -81,11 +76,11 @@ var TaskTable = React.createClass({
         }
         var orderedTasks = Lodash.orderBy(datas, [currentColumn.column], [currentColumn.direction]);
         return orderedTasks;
-    },
-    onPagingHandler: function (page, rowsToDisplay, sortName) {
-        var filters = [];
-        var sortedTasks = this.onSorting(sortName);
-        var nextIndex = (page - 1) * rowsToDisplay;
+    }
+    onPagingHandler(page, rowsToDisplay, sortName) {
+        let filters = [];
+        const sortedTasks = this.onSorting(sortName);
+        let nextIndex = (page - 1) * rowsToDisplay;
         for (var i = 0; i < rowsToDisplay; i++) {
             if (sortedTasks[nextIndex] != undefined) {
                 filters.push(sortedTasks[nextIndex]);
@@ -94,16 +89,16 @@ var TaskTable = React.createClass({
         }
         this.setState({ filteredTasks: filters, currentPage: page });
 
-        var datas = StorageHelper.GetTasks();
+        const datas = StorageHelper.GetTasks();
         if (filters.length == 0 && datas.length > 0) {
             this.onPagingHandler(page - 1, rowsToDisplay, sortName);
         }
-    },
-    selectedValueHandler: function (e) {
-         this.setState({ totalRowDisplay: e.target.value});
+    }
+    selectedValueHandler(e) {
+        this.setState({ totalRowDisplay: e.target.value });
         this.onPagingHandler(this.state.currentPage, e.target.value)
-    },
-    render: function () {
+    }
+    render() {
         return (
             <div className="panel panel-primary">
                 <div className="panel-heading">Task Master List</div>
@@ -121,14 +116,11 @@ var TaskTable = React.createClass({
                     <TablePagination
                         data={this.state.tasks}
                         currentPage={this.state.currentPage}
-                        onPagingHandler={this.onPagingHandler}
-                        selectedValueHandler = {this.selectedValueHandler} />
-                    <TaskAddModal onSaveHandler={this.onSaveHandler} />
+                        onPagingHandler={this.onPagingHandler.bind(this)}
+                        selectedValueHandler={this.selectedValueHandler.bind(this)} />
+                    <TaskAddModal onSaveHandler={this.onSaveHandler.bind(this)} />
                 </div>
             </div>
         )
     }
-});
-
-
-module.exports = TaskTable;
+}

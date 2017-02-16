@@ -1,31 +1,29 @@
 
-'user strict'
-
-var React = require('react');
-var StorageHelper = require('./../helpers/storagehelper');
-
+import React, { Component } from 'react';
+import * as StorageHelper from '../helpers/storagehelper';
 import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
 
-var TaskActionButton = React.createClass({
-    getInitialState: function () {
-        return {
+export default class TaskActionButton extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             onEditForm: false,
             task: this.props.task
-        }
-    },
-    onEditFormHandler: function (task) {
+        };
+    }
+    onEditFormHandler(task) {
         this.setState({ onEditForm: true });
-        this.props.onEditHandler(task)        
-    },
-    onDeleteFormHandler: function(task){
+        this.props.onEditHandler(task)
+    }
+    onDeleteFormHandler(task) {
         this.props.onDeleteHandler(task);
-    },
-    onSaveOrCancelFormHandler: function (task) {
+    }
+    onSaveOrCancelFormHandler(task) {
         this.setState({ onEditForm: false });
         this.props.onSaveHandler(task)
-    },
-    render: function () {
-        var style1 = 'btn-group', style2 = 'hidden';
+    }
+    render() {
+        let style1 = 'btn-group', style2 = 'hidden';
         if (this.state.onEditForm) {
             style1 = 'hidden';
             style2 = 'btn-group';
@@ -47,6 +45,4 @@ var TaskActionButton = React.createClass({
             </div>
         )
     }
-});
-
-module.exports = TaskActionButton;
+}

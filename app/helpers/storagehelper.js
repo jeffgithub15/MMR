@@ -3,12 +3,12 @@ import Lodash from 'lodash';
 
 
 export function Save(task) {
-    var tasks = JSON.parse(localStorage.getItem('tasks'))
-    var currentTask = Lodash.find(tasks, function (i) {
+    let tasks = JSON.parse(localStorage.getItem('tasks'))
+    let currentTask = Lodash.find(tasks, function (i) {
         return i.id == task.id
     })
     if (currentTask == undefined) {
-        var lastTask = Lodash.maxBy(tasks, 'id');
+        const lastTask = Lodash.maxBy(tasks, 'id');
         if (lastTask != undefined) {
             task.id = lastTask.id + 1;
         }
@@ -29,8 +29,8 @@ export function Save(task) {
 }
 
 export function Delete(task) {
-    var tasks = JSON.parse(localStorage.getItem('tasks'))
-    var currentTask = Lodash.find(tasks, function (i) {
+    let tasks = JSON.parse(localStorage.getItem('tasks'))
+    const currentTask = Lodash.find(tasks, function (i) {
         return i.id == task.id
     })
     if (currentTask != undefined) {
@@ -43,12 +43,12 @@ export function Delete(task) {
 }
 
 export function GetTasks() {
-    var tasks = JSON.parse(localStorage.getItem('tasks'))
+    let tasks = JSON.parse(localStorage.getItem('tasks'))
     return tasks;
 }
 
 export function InitTaskData() {
-    var tasks = [
+    const tasks = [
         { id: 1, name: 'Finish Week 1 Deck', description: 'Introduction, React Component, JSX, Virtual DOM', priority: '1', status: 'To Do' },
         { id: 2, name: 'Finish Week 1 Quiz', description: 'Introduction to MMR', priority: '2', status: 'Done' },
         { id: 3, name: 'Finish Week 3 Deck', description: 'Props and State', priority: '3', status: 'Done' },

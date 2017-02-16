@@ -1,27 +1,22 @@
+import React, { Component } from 'react';
 
-'user strict'
-
-var React = require('react');
-
-var StatusDropdown = React.createClass({
-    selectedValueHandler: function (e) {
+export default class StatusDropdown extends React.Component {
+    selectedValueHandler(e) {
         this.props.selectedValueHandler(e);
-    },
-    getStatusDropdown: function (style) {
+    }
+    getStatusDropdown(style) {
         return (<select className={style}
-            onChange={this.selectedValueHandler}
+            onChange={this.selectedValueHandler.bind(this)}
             value={this.props.selectValue}>
             <option value="-1">-- Select --</option>
             <option value="To Do">To Do</option>
             <option value="In Progress">In Progress</option>
             <option value="Done">Done</option>
         </select>);
-    },
-    render: function () {
+    }
+    render() {
         return (
             this.getStatusDropdown(this.props.dropdownStyle)
         )
     }
-});
-
-module.exports = StatusDropdown;
+};

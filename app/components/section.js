@@ -1,12 +1,8 @@
-
-'user strict'
-
-var React = require('react');
+import React, { Component } from 'react';
 import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
 
-
-var SeactionLayout = React.createClass({
-    render: function () {
+export default class SeactionLayout extends React.Component{
+    render() {
         return (
             <div className="section-border">
                 <h2>{this.props.title}</h2>
@@ -15,6 +11,4 @@ var SeactionLayout = React.createClass({
             </div>
         )
     }
-});
-
-module.exports = SeactionLayout;
+};

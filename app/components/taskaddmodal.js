@@ -1,15 +1,16 @@
 
 'user strict'
 
-var React = require('react');
+import React, { Component } from 'react';
 import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
 import { Modal, Button } from 'react-bootstrap';
 import StatusDropdown from './statusdropdown.js';
 import PriorityDropdown from './prioritydropdown';
 
-var TaskAddModal = React.createClass({
-    getInitialState: function () {
-        return {
+export default class TaskAddModal extends React.Component {
+    constructor() {
+        super();
+        this.state = {
             onEditForm: false,
             name: '',
             description: '',
@@ -17,15 +18,14 @@ var TaskAddModal = React.createClass({
             status: '-1',
             showModal: false
         }
-    },
+    }
     close() {
         this.setState({ showModal: false });
-    },
-
+    }
     open() {
         this.setState({ showModal: true });
-    },
-    onSaveOrCancelFormHandler: function () {
+    }
+    onSaveOrCancelFormHandler() {
         this.setState({ onEditForm: false });
         var task = {};
         task.name = this.state.name;
@@ -35,33 +35,33 @@ var TaskAddModal = React.createClass({
         this.props.onSaveHandler(task);
         this.clearForm();
         this.close();
-    },
-    taskNameChangeHandler: function (e) {
+    }
+    taskNameChangeHandler(e) {
         this.setState({ name: e.target.value });
-    },
-    taskDescriptionChangeHandler: function (e) {
+    }
+    taskDescriptionChangeHandler(e) {
         this.setState({ description: e.target.value });
-    },
-    priorityChangeHandler: function (e) {
+    }
+    priorityChangeHandler(e) {
         this.setState({ priority: e.target.value });
-    },
-    statusChangeHandler: function (e) {
+    }
+    statusChangeHandler(e) {
         this.setState({ status: e.target.value });
-    },
-    clearForm: function (e) {
+    }
+    clearForm(e) {
         this.setState({ description: '', name: '', priority: '-- Select --', status: '-- Select --' });
-    },
-    render: function () {
-        var style1 = 'btn-group', style2 = 'hidden';
+    }
+    render () {
+        let style1 = 'btn-group', style2 = 'hidden';
         if (this.state.onEditForm) {
             style1 = 'hidden';
             style2 = 'btn-group';
         }
         return (
             <div>
-                <Button bsStyle="primary" onClick={this.open}>Add New</Button>
+                <Button bsStyle="primary" onClick={this.open.bind(this)}>Add New</Button>
 
-                <Modal show={this.state.showModal} onHide={this.close}>
+                <Modal show={this.state.showModal} onHide={this.close.bind(this)}>
                     <Modal.Header closeButton>
                         <Modal.Title>Add New Task</Modal.Title>
                     </Modal.Header>
@@ -70,14 +70,14 @@ var TaskAddModal = React.createClass({
                             <div className="form-group">
                                 <label className="col-sm-2 control-label">Name</label>
                                 <div className="col-sm-10">
-                                    <input type="text" className="form-control" value={this.state.name} placeholder="Name" onChange={this.taskNameChangeHandler} />
+                                    <input type="text" className="form-control" value={this.state.name} placeholder="Name" onChange={this.taskNameChangeHandler.bind(this)} />
                                 </div>
                             </div>
                             <div className="form-group">
                                 <label className="col-sm-2 control-label">Description</label>
                                 <div className="col-sm-10">
                                     <textarea className="form-control" rows="3" value={this.state.description} placeholder="Description"
-                                        onChange={this.taskDescriptionChangeHandler}></textarea>
+                                        onChange={this.taskDescriptionChangeHandler.bind(this)}></textarea>
                                 </div>
                             </div>
                             <div className="form-group">
@@ -85,7 +85,7 @@ var TaskAddModal = React.createClass({
                                 <div className="col-sm-10">
                                     <StatusDropdown dropdownStyle="form-control"
                                         selectValue={this.state.status}
-                                        selectedValueHandler={this.statusChangeHandler} />
+                                        selectedValueHandler={this.statusChangeHandler.bind(this)} />
                                 </div>
                             </div>
                             <div className="form-group">
@@ -93,19 +93,17 @@ var TaskAddModal = React.createClass({
                                 <div className="col-sm-10">
                                     <PriorityDropdown dropdownStyle="form-control"
                                         selectValue={this.state.priority}
-                                        selectedValueHandler={this.priorityChangeHandler} />
+                                        selectedValueHandler={this.priorityChangeHandler.bind(this)} />
                                 </div>
                             </div>
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button onClick={this.close}>Close</Button>
-                        <Button bsStyle="primary" onClick={this.onSaveOrCancelFormHandler}>Save Changes</Button>
+                        <Button onClick={this.close.bind(this)}>Close</Button>
+                        <Button bsStyle="primary" onClick={this.onSaveOrCancelFormHandler.bind(this)}>Save Changes</Button>
                     </Modal.Footer>
                 </Modal>
             </div>
         )
     }
-});
-
-module.exports = TaskAddModal;
+}
