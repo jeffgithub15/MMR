@@ -6,12 +6,16 @@ import TaskTableRow from './tasktablerow.js';
 import TaskAddModal from './taskaddmodal.js';
 import TablePagination from './tablepagination';
 import Lodash from 'lodash';
+import Dispatcher from '../dispatcher'
+import * as taskActions from '../actions/taskActions'
+import TasksStore from '../stores/TasksStore'
+
 
 export default class TaskTable extends React.Component {
     constructor() {
         super();
         this.state = {
-            tasks: StorageHelper.GetTasks(),
+            tasks: TasksStore.getTasks(),
             filteredTasks: [],
             currentPage: 1,
             currentSortName: { column: 'name', direction: '' },
@@ -20,6 +24,11 @@ export default class TaskTable extends React.Component {
     }
     componentWillMount() {
         this.onPagingHandler(1, this.state.totalRowDisplay);
+        TasksStore.on('change', this.refreshTaskList.bind(this));
+    }
+    refreshTaskList() {
+        this.setState({ tasks: TasksStore.getTasks() });
+        this.onPagingHandler(this.state.currentPage, this.state.totalRowDisplay);
     }
     getTableHeader() {
         return (
@@ -42,27 +51,26 @@ export default class TaskTable extends React.Component {
         for (var i = 0; i < this.state.filteredTasks.length; i++) {
             rows.push(<TaskTableRow key={this.state.filteredTasks[i].id} className="pull-right"
                 task={this.state.filteredTasks[i]}
-                onSaveHandler={this.onSaveHandler.bind(this)}
+                onSaveHandler={this.onEditHandler.bind(this)}
                 onDeleteHandler={this.onDeleteHandler.bind(this)} />);
         }
         return rows;
     }
     onSaveHandler(task) {
-        StorageHelper.Save(task);
-        this.setState({ tasks: StorageHelper.GetTasks() });
-        this.onPagingHandler(this.state.currentPage, this.state.totalRowDisplay);
+        taskActions.addTask(task);
+    }
+    onEditHandler(task) {
+        taskActions.editTask(task);
     }
     onDeleteHandler(task) {
-        StorageHelper.Delete(task);
-        this.setState({ tasks: StorageHelper.GetTasks() });
-        this.onPagingHandler(this.state.currentPage, this.state.totalRowDisplay);
+        taskActions.deleteTask(task);
     }
     onSelectedCurrentPage(page) {
         this.onPagingHandler(page, this.state.totalRowDisplay, this.state.currentSortName);
         this.setState({ currentPage: page });
     }
     onSorting(sortName) {
-        var datas = StorageHelper.GetTasks();
+        var datas = TasksStore.getTasks();
         var currentColumn = this.state.currentSortName;
         var columnToFind = (sortName == undefined ? this.state.currentSortName : sortName);
 
@@ -89,7 +97,7 @@ export default class TaskTable extends React.Component {
         }
         this.setState({ filteredTasks: filters, currentPage: page });
 
-        const datas = StorageHelper.GetTasks();
+        const datas = TasksStore.getTasks();
         if (filters.length == 0 && datas.length > 0) {
             this.onPagingHandler(page - 1, rowsToDisplay, sortName);
         }

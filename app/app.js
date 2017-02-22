@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-/*var $ = require('jquery');*/
 
 import HeaderLayout from './components/header';
 import JumbotronLayout from './components/jumbotron';

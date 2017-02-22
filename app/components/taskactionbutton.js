@@ -13,7 +13,7 @@ export default class TaskActionButton extends React.Component {
     }
     onEditFormHandler(task) {
         this.setState({ onEditForm: true });
-        this.props.onEditHandler(task)
+        this.props.onEditHandler(task);
     }
     onDeleteFormHandler(task) {
         this.props.onDeleteHandler(task);

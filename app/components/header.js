@@ -2,8 +2,9 @@
 import React, { Component } from 'react';
 import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
 import BootstrapJs from 'bootstrap/dist/js/bootstrap.js';
+import PriorityPanel from './prioritypanel';
 
-export default class HeaderLayout extends React.Component{
+export default class HeaderLayout extends React.Component {
     getActiveClass(page) {
         return page === this.props.page ? "active" : '';
     }
@@ -26,6 +27,14 @@ export default class HeaderLayout extends React.Component{
                             <li className={this.getActiveClass('/tasks')}><a href="tasks">Tasks</a></li>
                             <li className={this.getActiveClass('/about')}><a href="about">About</a></li>
                             <li className={this.getActiveClass('/contact')}><a href="contact">Contact</a></li>
+                        </ul>
+                        <ul className="nav navbar-nav navbar-right">
+                            <li className="dropdown">
+                                <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Priority Panel
+                                    <span className="caret"></span></a>
+                                <PriorityPanel styleName={'dropdown-menu'} />
+                            </li>
                         </ul>
                     </div>
                 </div>
