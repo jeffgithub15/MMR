@@ -40,4 +40,4 @@ ReactDOM.render((
 ), document.getElementById('root'))
 
 
-StorageHelper.InitTaskData();
+//StorageHelper.InitTaskData();

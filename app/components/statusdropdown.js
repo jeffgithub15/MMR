@@ -8,7 +8,6 @@ export default class StatusDropdown extends React.Component {
         return (<select className={style}
             onChange={this.selectedValueHandler.bind(this)}
             value={this.props.selectValue}>
-            <option value="-1">-- Select --</option>
             <option value="To Do">To Do</option>
             <option value="In Progress">In Progress</option>
             <option value="Done">Done</option>

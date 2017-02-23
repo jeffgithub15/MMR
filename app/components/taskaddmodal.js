@@ -6,16 +6,19 @@ import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
 import { Modal, Button } from 'react-bootstrap';
 import StatusDropdown from './statusdropdown.js';
 import PriorityDropdown from './prioritydropdown';
+import * as taskActions from '../actions/taskActions'
+import TasksStore from '../stores/TasksStore'
+
 
 export default class TaskAddModal extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             onEditForm: false,
             name: '',
             description: '',
-            priority: '-1',
-            status: '-1',
+            priority: '1',
+            status: 'To Do',
             showModal: false
         }
     }
@@ -32,7 +35,8 @@ export default class TaskAddModal extends React.Component {
         task.description = this.state.description;
         task.priority = this.state.priority;
         task.status = this.state.status;
-        this.props.onSaveHandler(task);
+        taskActions.addTask(task);
+
         this.clearForm();
         this.close();
     }
@@ -49,7 +53,7 @@ export default class TaskAddModal extends React.Component {
         this.setState({ status: e.target.value });
     }
     clearForm(e) {
-        this.setState({ description: '', name: '', priority: '-- Select --', status: '-- Select --' });
+        this.setState({ description: '', name: '', priority: '1', status: 'To Do' });
     }
     render () {
         let style1 = 'btn-group', style2 = 'hidden';
@@ -59,8 +63,7 @@ export default class TaskAddModal extends React.Component {
         }
         return (
             <div>
-                <Button bsStyle="primary" onClick={this.open.bind(this)}>Add New</Button>
-
+                <a className={this.props.buttonStyle} onClick={this.open.bind(this)}>Add Task</a>
                 <Modal show={this.state.showModal} onHide={this.close.bind(this)}>
                     <Modal.Header closeButton>
                         <Modal.Title>Add New Task</Modal.Title>

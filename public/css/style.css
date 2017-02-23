@@ -15,3 +15,17 @@
     overflow-y: scroll;
     margin: 5px;
 }
+
+.task-header-menu {
+    padding: 16px 15px 0px 8px;
+}
+
+.task-header-menu a {
+    color: #9d9d9d;
+}
+
+.task-header-menu a:hover{
+    text-decoration: none;
+    color: #9d9d9d;
+    cursor: pointer;
+}

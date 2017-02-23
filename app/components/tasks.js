@@ -126,7 +126,7 @@ export default class TaskTable extends React.Component {
                         currentPage={this.state.currentPage}
                         onPagingHandler={this.onPagingHandler.bind(this)}
                         selectedValueHandler={this.selectedValueHandler.bind(this)} />
-                    <TaskAddModal onSaveHandler={this.onSaveHandler.bind(this)} />
+                    <TaskAddModal onSaveHandler={this.onSaveHandler.bind(this)} buttonStyle="btn btn-primary"/>
                 </div>
             </div>
         )

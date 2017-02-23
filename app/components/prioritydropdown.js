@@ -7,8 +7,7 @@ export default class PriorityDropdown extends React.Component{
     getPriorityDropdown(style) {
         return (<select className={style}
             onChange={this.selectedValueHandler.bind(this)}
-            value={this.props.selectValue} >            
-            <option value="-1">-- Select --</option>
+            value={this.props.selectValue} >        
             <option value="1">Low</option>
             <option value="2">Medium</option>
             <option value="3">High</option>
