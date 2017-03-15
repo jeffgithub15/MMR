@@ -29,3 +29,9 @@
     color: #9d9d9d;
     cursor: pointer;
 }
+
+
+.panel-footer .btn
+{
+    margin-right: 10px;
+}

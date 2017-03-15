@@ -42,6 +42,9 @@ export default class TaskTable extends React.Component {
                 <th>
                     <a className="btn" onClick={() => { this.onPagingHandler(this.state.currentPage, this.state.totalRowDisplay, "status") } }>Status</a>
                 </th>
+                <th>
+                    <a className="btn" onClick={() => { this.onPagingHandler(this.state.currentPage, this.state.totalRowDisplay, "configurationId") } }>Configuration</a>
+                </th>
                 <th></th>
             </tr>
         )

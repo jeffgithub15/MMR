@@ -5,6 +5,8 @@ import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
 import TaskActionButton from './taskactionbutton.js';
 import StatusDropdown from './statusdropdown.js';
 import PriorityDropdown from './prioritydropdown';
+import ConfigurationDropdown from './configurationdropdown';
+import ConfigurationStore from '../stores/ConfigurationStore'
 
 export default class TaskTableRow extends React.Component {
     constructor(props) {
@@ -15,7 +17,8 @@ export default class TaskTableRow extends React.Component {
             name: this.props.task.name,
             description: this.props.task.description,
             priority: this.props.task.priority,
-            status: this.props.task.status
+            status: this.props.task.status,
+            configurationId: this.props.task.configurationId
         };
     }
     getPriorityName(priority) {
@@ -27,6 +30,13 @@ export default class TaskTableRow extends React.Component {
             return "High";
         return priority;
     }
+    getConfigurationName(configurationId) {
+        let name = "";
+        let config = ConfigurationStore.getConfigurationById(configurationId);
+        if(config != undefined)
+            name = config.name;
+        return name;
+    }
     onEditHandler(task) {
         this.setState({ onEditForm: true });
     }
@@ -36,6 +46,7 @@ export default class TaskTableRow extends React.Component {
         task.description = this.state.description;
         task.priority = this.state.priority;
         task.status = this.state.status;
+        task.configurationId = this.state.configurationId;
         this.props.onSaveHandler(task);
     }
     onDeleteFormHandler(task) {
@@ -53,6 +64,9 @@ export default class TaskTableRow extends React.Component {
     }
     statusChangeHandler(e) {
         this.setState({ status: e.target.value });
+    }
+    configurationChangeHandler(e) {
+        this.setState({ configurationId: e.target.value });
     }
     render() {
         let style1 = 'form-control', style2 = 'hidden';
@@ -73,6 +87,9 @@ export default class TaskTableRow extends React.Component {
 
                 <td className="col-md-2"><StatusDropdown dropdownStyle={style1} selectValue={this.state.status} selectedValueHandler={this.statusChangeHandler.bind(this)} />
                     <span className={style2}>{this.state.task.status}</span></td>
+
+                <td className="col-md-2"><ConfigurationDropdown dropdownStyle={style1} selectValue={this.state.configurationId} selectedValueHandler={this.configurationChangeHandler.bind(this)} />
+                    <span className={style2}>{this.getConfigurationName(this.state.task.configurationId)}</span></td>
 
                 <td className="col-md-2"><TaskActionButton task={this.state.task} onEditHandler={this.onEditHandler.bind(this)}
                     onDeleteHandler={this.onDeleteFormHandler.bind(this)} onSaveHandler={this.onSaveOrCancelFormHandler.bind(this)} /></td>
