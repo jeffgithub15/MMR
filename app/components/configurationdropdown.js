@@ -10,7 +10,6 @@ export default class ConfigurationDropdown extends React.Component {
     }
     getConfigurationDropdown() {
         const configs = ConfigurationStore.getConfigurations();
-        console.log(configs);
         let rows = [];
         for (var i = 0; i < configs.length; i++) {
             rows.push(<option key={configs[i].id} value={configs[i].id}>{configs[i].name}</option>);

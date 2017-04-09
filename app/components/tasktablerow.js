@@ -33,7 +33,7 @@ export default class TaskTableRow extends React.Component {
     getConfigurationName(configurationId) {
         let name = "";
         let config = ConfigurationStore.getConfigurationById(configurationId);
-        if(config != undefined)
+        if (config != undefined)
             name = config.name;
         return name;
     }
@@ -42,11 +42,13 @@ export default class TaskTableRow extends React.Component {
     }
     onSaveOrCancelFormHandler(task) {
         this.setState({ onEditForm: false });
+        const configuration = ConfigurationStore.getConfigurationById(this.state.configurationId);
         task.name = this.state.name;
         task.description = this.state.description;
         task.priority = this.state.priority;
         task.status = this.state.status;
         task.configurationId = this.state.configurationId;
+        task.durationInMinutes = configuration.durationInMinutes;
         this.props.onSaveHandler(task);
     }
     onDeleteFormHandler(task) {
@@ -90,6 +92,8 @@ export default class TaskTableRow extends React.Component {
 
                 <td className="col-md-2"><ConfigurationDropdown dropdownStyle={style1} selectValue={this.state.configurationId} selectedValueHandler={this.configurationChangeHandler.bind(this)} />
                     <span className={style2}>{this.getConfigurationName(this.state.task.configurationId)}</span></td>
+
+                <td className="col-md-2">{this.state.task.durationInMinutes + ':' + this.state.task.durationInSeconds}</td>
 
                 <td className="col-md-2"><TaskActionButton task={this.state.task} onEditHandler={this.onEditHandler.bind(this)}
                     onDeleteHandler={this.onDeleteFormHandler.bind(this)} onSaveHandler={this.onSaveOrCancelFormHandler.bind(this)} /></td>

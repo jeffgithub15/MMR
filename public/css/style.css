@@ -35,3 +35,20 @@
 {
     margin-right: 10px;
 }
+
+.pomodoro-container
+{
+    width: 50%;
+}
+
+.pomodoro-time-label{
+    color: red;
+    font-size: 36pt;
+    text-align: center;
+    font-weight: bold;
+}
+.container-table{
+    width: 95%;
+    text-align: center;
+    margin: 10px;
+}

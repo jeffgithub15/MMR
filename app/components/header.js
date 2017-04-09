@@ -28,6 +28,7 @@ export default class HeaderLayout extends React.Component {
                             <li className={this.getActiveClass('/tasks')}><a href="tasks">Tasks</a></li>
                             <li className={this.getActiveClass('/about')}><a href="about">About</a></li>
                             <li className={this.getActiveClass('/contact')}><a href="contact">Contact</a></li>
+                            <li className={this.getActiveClass('/configurations')}><a href="configurations">Configurations</a></li>
                         </ul>
                         <ul className="nav navbar-nav navbar-right">
                             <li className="dropdown">

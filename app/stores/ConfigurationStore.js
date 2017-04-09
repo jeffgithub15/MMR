@@ -2,15 +2,17 @@ import { EventEmitter } from 'events';
 
 import Dispatcher from '../dispatcher';
 
+import PomodoroConfig from '../constants/pomodoroConfiguration';
+
 class ConfigurationStore extends EventEmitter {
     constructor() {
         super();
         let configs = JSON.parse(localStorage.getItem('configurations'))
         if (configs == undefined) {
             configs = [
-                { id: 1, name: '10 Minutes', durationInMinutes: 10 },
-                { id: 2, name: '15 Minutes', durationInMinutes: 15 },
-                { id: 3, name: '20 Minutes', durationInMinutes: 20 },
+                { id: PomodoroConfig.SHORT_BREAK, name: 'Short Break', durationInMinutes: 10 },
+                { id: PomodoroConfig.LONG_BREAK, name: 'Long Break', durationInMinutes: 15 },
+                { id: PomodoroConfig.POMODORO, name: 'Pomodoro', durationInMinutes: 25 },
                 { id: 4, name: '25 Minutes', durationInMinutes: 25 },
                 { id: 5, name: '30 Minutes', durationInMinutes: 30 },
                 { id: 6, name: '35 Minutes', durationInMinutes: 35 },

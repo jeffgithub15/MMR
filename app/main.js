@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import * as StorageHelper from './helpers/storagehelper';
 import { Router, Route, Link, IndexRoute, hashHistory, browserHistory } from 'react-router'
 import TaskTable from './components/tasks';
+import ConfigurationPanel from './components/configurationpanel';
 import MMRApplication from './app.js';
 
 class AboutApp extends React.Component
@@ -34,6 +35,7 @@ ReactDOM.render((
       <Route path="tasks" component={TaskTable}/>
       <Route path="about" component={AboutApp}/>        
       <Route path="contact" component={ContactApp}/>
+      <Route path="configurations" component={ConfigurationPanel}/>
       <Route path="*" component={MMRApplication}/>
     </Route>
   </Router>

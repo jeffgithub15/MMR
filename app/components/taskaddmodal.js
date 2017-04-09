@@ -54,7 +54,7 @@ export default class TaskAddModal extends React.Component {
     }
     clearForm(e) {
         this.setState({ description: '', name: '', priority: '1', status: 'To Do' });
-    }
+    }    
     render () {
         let style1 = 'btn-group', style2 = 'hidden';
         if (this.state.onEditForm) {

@@ -45,13 +45,16 @@ export default class TaskTable extends React.Component {
                 <th>
                     <a className="btn" onClick={() => { this.onPagingHandler(this.state.currentPage, this.state.totalRowDisplay, "configurationId") } }>Configuration</a>
                 </th>
+                <th>
+                    <a className="btn">Time Remaining</a>
+                </th>
                 <th></th>
             </tr>
         )
     }
     getTaskRows() {
         let rows = [];
-        for (var i = 0; i < this.state.filteredTasks.length; i++) {
+        for (let i = 0; i < this.state.filteredTasks.length; i++) {
             rows.push(<TaskTableRow key={this.state.filteredTasks[i].id} className="pull-right"
                 task={this.state.filteredTasks[i]}
                 onSaveHandler={this.onEditHandler.bind(this)}
